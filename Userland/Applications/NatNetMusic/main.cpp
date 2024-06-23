@@ -11,7 +11,7 @@ ErrorOr<int> serenity_main(Main::Arguments arguments)
     auto app_icon = TRY(GUI::Icon::try_create_default_icon("filetype-music"sv));
 
     auto window = GUI::Window::construct();
-    window->resize(640, 480);
+    window->resize(745, 480);
     window->set_title("NatNet Music");
     window->set_icon(app_icon.bitmap_for_size(16));
 

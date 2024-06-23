@@ -167,11 +167,12 @@ void TaskbarWindow::add_system_menu(NonnullRefPtr<GUI::Menu> system_menu)
 {
     m_system_menu = move(system_menu);
 
-    m_start_button = GUI::Button::construct("SequaSoft"_string);
+    m_start_button = GUI::Button::construct("Go!"_string);
     set_start_button_font(Gfx::FontDatabase::default_font().bold_variant());
     m_start_button->set_icon_spacing(0);
-    auto app_icon = GUI::Icon::default_icon("ladyball"sv);
-    m_start_button->set_icon(app_icon.bitmap_for_size(16));
+    auto app_icon = Gfx::Bitmap::load_from_file("/res/icons/16x16/sequasoft.png"sv).release_value_but_fixme_should_propagate_errors();
+    // auto app_icon = GUI::Icon::default_icon("ladyball"sv);
+    m_start_button->set_icon(app_icon);
     m_start_button->set_menu(m_system_menu);
 
     GUI::Widget* main = main_widget();

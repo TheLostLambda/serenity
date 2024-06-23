@@ -78,7 +78,7 @@
                 @GUI::HorizontalSeparator
 
                 @GUI::ImageWidget {
-                    bitmap: "/res/icons/32x32/app-screenshot.png"
+                    bitmap: "/res/graphics/natnet/enlist.png"
                 }
             }
 
@@ -88,19 +88,139 @@
                     margins: [4, 4]
                 }
 
-                @GUI::Label {
-                    name: "word_wrap_label"
-                    word_wrap: true
-                    text_alignment: "TopLeft"
-                    font_size: 24
-                    text: "Lorem ipsum sistema serenitas, per construxit klingre sed quis awesomatia, ergo salve amici."
+                @GUI::Widget {
+                    preferred_height: "shrink"
+                    layout: @GUI::HorizontalBoxLayout {
+                        margins: [0, 0, 4, 0]
+                    }
+
+                    @GUI::ImageWidget {
+                        bitmap: "/res/graphics/natnet/sadbot.png"
+                    }
+
+                    @GUI::Label {
+                        width: 4
+                    }
+
+                    @GUI::Widget {
+                        layout: @GUI::VerticalBoxLayout {}
+
+                        @GUI::Label {
+                            font: "Liza"
+                            font_size: 36
+                            text: "SADBOT"
+                        }
+
+                        @GUI::Widget {
+                            layout: @GUI::VerticalBoxLayout {}
+
+                            @GUI::Label {
+                                text_alignment: "CenterLeft"
+                                font: "Liberation Sans"
+                                font_size: 14
+                                text: "Location: Sheffield, BF\nGenre: Synthpop\nFollowers: 142,857"
+                            }
+                        }
+
+                        @GUI::Frame {
+                            preferred_height: 70
+                            frame_style: "SunkenPanel"
+                            layout: @GUI::VerticalBoxLayout {
+                                margins: [4, 4]
+                            }
+
+                            @GUI::Label {
+                                text_alignment: "TopLeft"
+                                font_size: 12
+                                font: "Lucidity"
+                                text: "Blending pre-war synth soundscapes with modern production, sadbot provides a soundtrack to your nostalgic ruminations"
+                            }
+                        }
+                    }
                 }
 
-                @GUI::Label {
-                    word_wrap: true
-                    text_alignment: "TopRight"
-                    font_size: 12
-                    text: "Lorem ipsum sistema serenitas, per construxit klingre sed quis awesomatia, ergo salve amici."
+                @GUI::HorizontalSeparator
+
+                @GUI::Widget {
+                    layout: @GUI::VerticalBoxLayout {}
+                    
+                    @GUI::Widget {
+                        layout: @GUI::HorizontalBoxLayout {}
+
+                        @GUI::Label {
+                            font: "Liberation Sans"
+                            font_size: 14
+                            text: "Top Songs"
+                        }
+
+                        @GUI::Label {
+                            font: "Liberation Sans"
+                            font_size: 14
+                            text: "Listens"
+                        }
+                    }
+
+                    @GUI::HorizontalSeparator
+
+                    @GUI::Widget {
+                        layout: @GUI::HorizontalBoxLayout {
+                            margins: [0, 16]
+                        }
+
+                        @GUI::Label {
+                            text_alignment: "CenterLeft"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "4 AM (Fashionably Lonely)"
+                        }
+
+                        @GUI::Label {
+                            name: "4am"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "..."
+                        }
+                    }
+
+                    @GUI::Widget {
+                        layout: @GUI::HorizontalBoxLayout {
+                            margins: [0, 16]
+                        }
+
+                        @GUI::Label {
+                            text_alignment: "CenterLeft"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "Catch Me Falling"
+                        }
+
+                        @GUI::Label {
+                            name: "falling"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "..."
+                        }
+                    }
+
+                    @GUI::Widget {
+                        layout: @GUI::HorizontalBoxLayout {
+                            margins: [0, 16]
+                        }
+
+                        @GUI::Label {
+                            text_alignment: "CenterLeft"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "Happy Just To Be Yours"
+                        }
+
+                        @GUI::Label {
+                            name: "happy"
+                            font: "Liberation Sans"
+                            font_size: 12
+                            text: "..."
+                        }
+                    }
                 }
             }
         }
@@ -108,8 +228,8 @@
         @GUI::ToolbarContainer{
             @GUI::Widget {
                 preferred_height: "shrink"
-                layout: @GUI::VerticalBoxLayout {
-                    margins: [4, 0]
+                layout: @GUI::HorizontalBoxLayout {
+                    margins: [4, 4, 4, 0]
                 }
 
                 @GUI::HorizontalSlider {
@@ -119,6 +239,18 @@
                     fixed_height: 20
                     enabled: true
                     jump_to_cursor: true
+                }
+
+                @GUI::Button {
+                    min_width: 50
+                    preferred_width: "shrink"
+                    text: "Fave"
+                }
+
+                @GUI::Button {
+                    min_width: 50
+                    preferred_width: "shrink"
+                    text: "Loop"
                 }
             }
 

@@ -11,6 +11,7 @@ public:
     virtual ~Widget() override = default;
 
     virtual void time_elapsed(int);
+    virtual void count_elapsed(int);
     virtual void volume_changed(int);
     virtual void mute_changed(bool);
     virtual void toggle_play();
@@ -38,7 +39,11 @@ private:
     RefPtr<GUI::HorizontalSlider> m_volume_slider;
     RefPtr<GUI::Label> m_timestamp_label;
 
-    int m_elapsed { 0 };
+    RefPtr<GUI::Label> m_4am;
+    RefPtr<GUI::Label> m_falling;
+    RefPtr<GUI::Label> m_happy;
+
+    int m_count { 0 };
     bool m_muted { false };
     bool m_playing { false };
 };

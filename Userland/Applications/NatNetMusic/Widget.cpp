@@ -5,20 +5,28 @@
 #include <LibGUI/HorizontalSlider.h>
 #include <LibGUI/Toolbar.h>
 #include <LibGUI/Action.h>
+#include <cmath>
 
 Widget::Widget()
 {
     load_from_gml(window_gml).release_value_but_fixme_should_propagate_errors();
 
-    m_play_timer = Core::Timer::create_repeating(1000, [this] {
-        if (m_elapsed <= 100) {
-            time_elapsed(++m_elapsed);
+    m_play_timer = Core::Timer::create_repeating(250, [this] {
+        ++m_count;
+        if (m_count <= 400) {
+            time_elapsed(m_count / 4);
+            count_elapsed(m_count);
         } else {
             toggle_play();
         }
     });
 
     m_playback_progress_slider = *find_descendant_of_type_named<GUI::HorizontalSlider>("seek-slider");
+    m_playback_progress_slider->on_change = [&](int value) {
+        m_count = 4 * value;
+        time_elapsed(m_count / 4);
+        count_elapsed(m_count);
+    };
 
     auto& play_controls = *find_descendant_of_type_named<GUI::Toolbar>("play-controls");
 
@@ -38,9 +46,10 @@ Widget::Widget()
     m_stop_action = GUI::Action::create("Stop", { Key_S }, m_stop_icon, [&](auto&) {
         if (m_playing) {
             toggle_play();
-            m_elapsed = 0;
-            time_elapsed(0);
         }
+        m_count = 0;
+        time_elapsed(m_count);
+        count_elapsed(m_count);
     });
     play_controls.add_action(*m_stop_action);
 
@@ -48,7 +57,7 @@ Widget::Widget()
 
     m_timestamp_label = play_controls.add<GUI::Label>();
     m_timestamp_label->set_fixed_width(110);
-    time_elapsed(m_elapsed);
+    time_elapsed(m_count / 4);
 
     // Filler label
     play_controls.add<GUI::Label>();
@@ -84,12 +93,27 @@ Widget::Widget()
     m_volume_slider->on_change = [&](int value) {
         volume_changed(value);
     };
+
+    m_4am = *find_descendant_of_type_named<GUI::Label>("4am");
+    m_falling = *find_descendant_of_type_named<GUI::Label>("falling");
+    m_happy = *find_descendant_of_type_named<GUI::Label>("happy");
+    count_elapsed(m_count);
 }
 
 void Widget::time_elapsed(int seconds)
 {
     m_playback_progress_slider->set_value(seconds);
     m_timestamp_label->set_text(String::formatted("Elapsed: {}", human_readable_digital_time(seconds)).release_value_but_fixme_should_propagate_errors());
+}
+
+void Widget::count_elapsed(int count)
+{
+    int m_4am_count = 15672 + (count * 54) + pow(1.05, count);
+    int m_falling_count = 1712 + (count * 17);
+    int m_happy_count = 7689 + (count * 33);
+    m_4am->set_text(String::formatted("{:'d}", m_4am_count).release_value_but_fixme_should_propagate_errors());
+    m_falling->set_text(String::formatted("{:'d}", m_falling_count).release_value_but_fixme_should_propagate_errors());
+    m_happy->set_text(String::formatted("{:'d}", m_happy_count).release_value_but_fixme_should_propagate_errors());
 }
 
 void Widget::volume_changed(int volume)
