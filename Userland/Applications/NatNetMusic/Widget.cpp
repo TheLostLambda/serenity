@@ -97,6 +97,9 @@ Widget::Widget()
     m_4am = *find_descendant_of_type_named<GUI::Label>("4am");
     m_falling = *find_descendant_of_type_named<GUI::Label>("falling");
     m_happy = *find_descendant_of_type_named<GUI::Label>("happy");
+
+    toggle_play();
+    m_count = 210;
     count_elapsed(m_count);
 }
 
@@ -108,7 +111,7 @@ void Widget::time_elapsed(int seconds)
 
 void Widget::count_elapsed(int count)
 {
-    int m_4am_count = 15672 + (count * 54) + pow(1.05, count);
+    int m_4am_count = 0 + (count * 54) + (pow(1.05, count) - 1);
     int m_falling_count = 1712 + (count * 17);
     int m_happy_count = 7689 + (count * 33);
     m_4am->set_text(String::formatted("{:'d}", m_4am_count).release_value_but_fixme_should_propagate_errors());
