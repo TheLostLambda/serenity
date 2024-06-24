@@ -191,7 +191,7 @@
                             text_alignment: "CenterLeft"
                             font: "Liberation Sans"
                             font_size: 12
-                            text: "Catch Me Falling"
+                            text: "The Loser"
                         }
 
                         @GUI::Label {

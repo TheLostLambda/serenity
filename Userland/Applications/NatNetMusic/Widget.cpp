@@ -111,9 +111,9 @@ void Widget::time_elapsed(int seconds)
 
 void Widget::count_elapsed(int count)
 {
-    int m_4am_count = 0 + (count * 54) + (pow(1.05, count) - 1);
-    int m_falling_count = 1712 + (count * 17);
-    int m_happy_count = 7689 + (count * 33);
+    int m_falling_count = 0 + (count * 930) + (pow(1.04, count) - 1);
+    int m_4am_count = 7124827 + (count * 33);
+    int m_happy_count = 7689 + (count * 17);
     m_4am->set_text(String::formatted("{:'d}", m_4am_count).release_value_but_fixme_should_propagate_errors());
     m_falling->set_text(String::formatted("{:'d}", m_falling_count).release_value_but_fixme_should_propagate_errors());
     m_happy->set_text(String::formatted("{:'d}", m_happy_count).release_value_but_fixme_should_propagate_errors());
